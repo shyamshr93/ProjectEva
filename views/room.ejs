@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>EVA - Watch Videos together with your family and friends</title>
+  <script>
+    const roomName = "<%= roomName %>"
+  </script>
+
+  <meta name="description" content="Watch videos together with Eva">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+  <link rel="stylesheet" href="/css/room.css">
+  <script src="https://use.fontawesome.com/ca75c4824c.js"></script>
+
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
+
+  <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+  <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand px-2" href="./" style="font-size: 1.9em;">walley</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <!-- <a class="nav-item nav-link active" href="./">Home <span class="sr-only">(current)</span></a> -->
+        <a class="nav-item nav-link" href="#">Login</a>
+        <a class="nav-item nav-link" href="#">About</a>
+        <!-- <a class="nav-item nav-link" href="#">Contact us</a> -->
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid mt-3 pb-2">
+    <div class="main_div px-md-2">
+      <div class="row">
+        <div class="col-md-8 px-10">
+          <div class="container-fluid pb-2 px-0 mb-2">
+            <div>
+              <div class="list-group list-group-horizontal" id="myList">
+                <a class="list-group-item list-group-item-action active" id="list-youtube-list"
+                  onclick="btYt_Player_Click();" style="margin-left: 0;"><i class="fab fa-youtube mr-1"></i> YOUTUBE</a>
+                <a class="list-group-item list-group-item-action" id="list-file-list"
+                  onclick="btLocal_Player_Click();"><i class="fas fa-tv mr-1"></i> PERSONAL</a>
+                <a class="list-group-item list-group-item-action" id="list-web-list" onclick="btWeb_Player_Click();"><i
+                    class="fas fa-globe-asia mr-1"></i> WEB</a>
+                <a class="list-group-item list-group-item-action" id="list-web-list" onclick="btWeb_Player_Click();"
+                  style="display: none;">Vimeo</a>
+              </div>
+            
+            </div>
+          </div>
+          <div id="yt_player" data-plyr-provider="youtube" data-plyr-embed-id="-iW1-BuJ_Hc" style="max-width: 250px;">
+          </div>
+          <div class="pt-2">
+            <div id="yt_main_div">
+              <div class="input-group mb-3">
+                <input type="text" id="ipYoutubeUrl" class="form-control mr-2" placeholder="enter youtube link"
+                  aria-label="Youtub URL" aria-describedby="btnSubmitYtUrl">
+                <div class="input-group-append">
+                  <button class="btn" type="button" id="btnSubmitYtUrl">LOAD</button>
+                </div>
+              </div>
+            </div>
+            <div id="local_main_div" style="display: none;">
+              <div>
+                
+                  <div class="custom-file">
+                    <input type="file" name="file" class="custom-file-input" id="btLocalFile"
+                      accept="video/x-matroska, video/*" onchange="loadLocalVideo();">
+                      <label id="vid-label" class="custom-file-label" for="btLocalFile">Choose file</label>
+                  </div>
+              </div>
+            </div>
+            <div id="web_main_div" style="display: none;">
+              <div class="input-group mb-3">
+                <input type="text" id="ipWebUrl" class="form-control mr-2" placeholder="enter web link"
+                  aria-label="Web URL" aria-describedby="btnSubmitWebUrl">
+                <div class="input-group-append">
+                  <button class="btn" type="button" id="btnSubmitWebUrl">LOAD</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Side -->
+        <div class="col-md">
+          <div class="chat_main_cont1 float-right">
+
+
+            <div class="container-fluid mx-0 px-0 chat_main_cont2">
+              <ul class="nav nav-tabs" id="myChatTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link myTabsLink active" id="users-tab" data-toggle="tab" href="#users" role="tab"
+                    aria-controls="users" aria-selected="true"><i class="fas fa-users"></i> USERS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link myTabsLink" id="chat-tab" data-toggle="tab" href="#chat" role="tab"
+                    aria-controls="chat" aria-selected="false"><i class="fas fa-comments"></i> CHAT</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link myTabsLink" id="log-tab" data-toggle="tab" href="#log" role="tab"
+                    aria-controls="log" aria-selected="false"><i class="far fa-file-alt"></i> LOGS</a>
+                </li>
+              </ul>
+
+              <!--Tabs Content-->
+
+              <div class="tab-content py-3 px-3" id="myChatTabContent">
+                <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
+                  <div id="triangle-up"></div>
+                  <div id="totalUsers"></div>
+                  <div id="usersList" class="mt-2 mb-3">
+
+                  </div>
+                  <button class="btn btn-lg btn-primary" onclick="reconnectUser()">Reconnect</button>
+                </div>
+
+                <div class="tab-pane fade" id="chat" role="tabpanel" aria-labelledby="chat-tab">
+                  <div id="triangle-up" style="margin-left:130px"></div>
+                  <div id="output" class="middle-chat"></div>
+                  <div class="input-group mb-3">
+
+                    <input type="text" id="message" placeholder="Message" aria-label="Message" class="form-control">
+                    <div class="input-group-append">
+                      <button id="submit" class="btn btn-danger"><i class="fas fa-paper-plane"
+                          style="transform: rotate(35deg);"></i></button>
+                    </div>
+                  </div>
+                  <div id="typing"></div>
+                </div>
+
+
+                <div class="tab-pane fade" id="log" role="tabpanel" aria-labelledby="log-tab">
+                  <div id="triangle-up" style="margin-left:220px"></div>
+                  <div id="logsOutput"></div>
+                </div>
+
+              </div>
+
+
+            </div>
+
+            <div>
+            </div>
+            <div id="video-grid"></div>
+            <div onclick="muteFunctionality()" style="display: none;" class="main__controls__button main__mute_button">
+              <i class="fas fa-microphone-alt"></i>
+              <span>Mute</span>
+            </div>
+            <div onclick="playStop()" style="display: none;" class="main__controls__button main__video_button">
+              <i class="fas fa-video"></i>
+              <span>Stop Video</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">JOIN</h5>
+        </div>
+        <div class="modal-body px-4">
+          <input type="text" id="userNameInput" placeholder="your name" aria-label="Your name" class="form-control"
+            style="max-width: 350px;">
+
+          <button type="button" class="btn" id="submitName">login</button>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+
+
+  <script src="/js/clientS.js"></script>
+
+</body>
+
+</html>

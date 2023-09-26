@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EVA - Watch Videos together with your family and friends</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id"
+        content="608531413987-moc951r5em2j8nj28upjg8nmt3kkdprp.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/home.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+
+<body>
+    <!-- connects to the server and displays results -->
+    <header class="eva-prim">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark px-0">
+                <a class="navbar-brand px-md-2" href="./" style="font-size: 1.9em; font-weight: 600;">WALLEY</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="./about">About</a>
+                        <a class="nav-item nav-link" href="#">Login</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section id="intro" class="px-2">
+        <div id="intro2">
+
+            <div class="container d-flex h-100">
+                <div class="justify-content-center align-self-center" id="chat">
+                    <h1 class="text-white display-3 font-weight-bold">
+                        WELCOME
+                    </h1>
+                    <h2 class="text-white mb-5">
+                        Watch videos together with your friends
+                    </h2>
+                    <a class="btn btn-primary btn-lg  font-weight-bold" onclick="openRoomDialog()">JOIN ROOM</a>
+                    <a class="btn btn-primary btn-lg ml-2 font-weight-bold" onclick="openRoomDialog()">CREATE ROOM</a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <main id="main">
+        <section id="video1" class="py-5" style="background-color: #f5f8fd;">
+            <div class="container">
+
+                <div class="g-signin2 d-none" data-onsuccess="onSignIn"></div>
+                <div class="row">
+                    <div class="col-lg-6 px-5 py-3">
+                        <img src="/assets/friends.svg" >
+                    </div>
+                    <div class="col-lg-6 px-5 py-3">
+                        <h1 class="font-weight-bold">WATCH TOGETHER</h1>
+                        <p class="mt-3">You can either a create a room where you can invite your friends and family or
+                            you can join a room!</p>
+                        <a class="btn btn-primary btn-lg btn-block mt-5 font-weight-bold"
+                            onclick="openRoomDialog()">JOIN ROOM</a>
+                        <a class="btn btn-primary btn-lg btn-block font-weight-bold" onclick="openRoomDialog()">CREATE
+                            ROOM</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="video2" class="py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 px-5 py-3 order-lg-2">
+                        <img src="https://github.com/Xbotics7/bruh/blob/main/2410.jpg?raw=true"
+                            style="max-width: 100%;">
+                    </div>
+                    <div class="col-lg-6 px-5 py-3">
+                        <h1 class="font-weight-bold">FRIENDS AND FAMILY</h1>
+                        <p class="mt-3">Watch videos in-sync with friends and family far away.</p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="features" class="py-5" style="background-color: #30343f;">
+            <div class="container">
+                <h1 class="text-white font-weight-bold text-center">FEATURES</h1>
+                <div class="text-center text-white my-4">
+                    <p><b>Watch Together : </b> Virtual movie night with your partner, friends, family, or colleagues? We've got you covered! Gather as many people as you like!</p>
+                    <p><b>Auto Sync : </b>No more 3, 2, 1...we'll handle the video synchronization for you!</p>
+                    <p><b>Laugh Together : </b>Use Live chat to see your friends' messages real-time - the next best thing to being together!</p>
+                </div>
+            </div>
+        </section>
+        <section id="services" class="py-5">
+            <div class="container">
+                <h1 class="text-center font-weight-bold">WE SUPPORT</h1>
+                <div class="text-center my-4">
+                    <h3>YOUTUBE</h3><br>
+                    <h3>PERSONAL VIDEOS FROM YOUR DEVICE</h3><br>
+                    <h3>VIDEOS FROM THE INTERNET</h3><br>
+                    <h3>CHAT</h3>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!-- Footer -->
+    <footer class="page-footer font-small" style="background-color: #00838f;">
+
+        <!-- Footer Elements -->
+        <div class="container pt-3">
+
+            <!-- Grid row-->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-12 pt-5">
+                    <div class="mb-5 text-center">
+
+                        <!-- Facebook -->
+                        <a class="fb-ic">
+                            <i class="fab fa-facebook-f fa-lg text-white mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!-- Twitter -->
+                        <a class="tw-ic">
+                            <i class="fab fa-twitter fa-lg text-white mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic">
+                            <i class="fab fa-instagram fa-lg text-white mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3" style="background-color: #006972; color: #ffffff99;">© 2021
+            Copyright
+            <a href="#"></a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+    <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="joinModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="joinModalLabel">WELCOME</h5>
+                </div>
+                <div class="modal-body px-4">
+                    <img class="room-icon mb-2" alt="Room Icon"
+                        src="https://github.com/shyamshr93/tempAssets/blob/main/room_icon.png?raw=true">
+                    <h5 class="room-title">room</h5>
+
+                    <input type="text" id="joinUserRoom" placeholder="enter room code" aria-label="Room Code"
+                        class="form-control" />
+
+                    <a class="my-2 btn-room-join" href=''
+                        onclick="this.href='/'+document.getElementById('joinUserRoom').value">join</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-room-close" data-dismiss="modal">close</button>
+                    <!-- <button type="button" class="btn btn-primary" id="btSubmitJoinRoom">JOIN</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+
+    <script src="/js/home.js"></script>
+</body>
+
+</html>
